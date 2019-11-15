@@ -1,12 +1,11 @@
 import * as React from 'react';
-
 import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 
 interface IProps {
   filename: string;
   alt?: string;
-  width?: string;
+  className?: string;
 }
 
 const QUERY = graphql`
@@ -28,7 +27,7 @@ const QUERY = graphql`
 `;
 
 export const Image = (props: IProps) => {
-  const { alt, width, filename } = props;
+  const { alt, className, filename } = props;
 
   const { images } = useStaticQuery(QUERY);
 
@@ -42,9 +41,5 @@ export const Image = (props: IProps) => {
 
   const imageSizes = image.node.childImageSharp.sizes;
 
-  return (
-    <div style={{ width }}>
-      <Img alt={alt} sizes={imageSizes} />
-    </div>
-  );
+  return <Img alt={alt} sizes={imageSizes} className={className} />;
 };
